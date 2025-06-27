@@ -1,25 +1,16 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose'); 
 const path = require('path');
 
-(async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI_TEST);
-        console.log('Conectado a MongoDb');
 
-        // Iniciar el servidor después de conectar a la base de datos
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
-            console.log(`Servidor escuchando en el puerto ${PORT}`);
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})();
 
-//Rutas front-end
-app.use('/', express.static(path.resolve('views', 'home' )));
+//Rutas Frontend
+app.use('/', express.static(path.resolve('views', 'home')));
+app.use('/styles', express.static(path.resolve('views', 'styles')));
+app.use('/signup', express.static(path.resolve('views', 'signup')));
+app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/components', express.static(path.resolve('views', 'components')));
+app.use('/images', express.static(path.resolve('img')));
+
 
 module.exports = app;
