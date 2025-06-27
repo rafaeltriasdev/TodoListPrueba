@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 const path = require('path');
 
 (async () => {
@@ -20,6 +20,6 @@ const path = require('path');
 })();
 
 //Rutas front-end
-app.use('/', express.static(path.resolve('front-end', 'viws', 'home' )));
+app.use('/', express.static(path.resolve('front-end', 'views', 'home' )));
 
 module.exports = app;
