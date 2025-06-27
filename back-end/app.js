@@ -20,6 +20,6 @@ const path = require('path');
 })();
 
 //Rutas front-end
-app.use('/', express.static(path.resolve('front-end', 'viws', 'home' )));
+app.use('/', express.static(path.resolve('front-end', 'views', 'home' )));
 
 module.exports = app;
