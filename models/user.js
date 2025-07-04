@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Configura cómo se transforman los documentos al convertirlos a JSON
-userSchema.set('toJSON', {
+userSchema.set('toJSON', {      
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString(); // Convierte el campo _id a un string y lo renombra a id
         delete returnedObject._id; // Elimina el campo _id que es generado por MongoDB
