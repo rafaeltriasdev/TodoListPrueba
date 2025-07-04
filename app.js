@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const usersRouter = require('./controllers/user');
 
 (async() =>{
     try {
@@ -13,6 +14,7 @@ const mongoose = require('mongoose');
     }
 })();
 
+app.use(express.json());
 
 //Rutas Frontend
 app.use('/', express.static(path.resolve('views', 'home')));
@@ -22,5 +24,7 @@ app.use('/login', express.static(path.resolve('views', 'login')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/images', express.static(path.resolve('img')));
 
+//Rutas Backend
+app.use('/api/users', usersRouter);
 
 module.exports = app;

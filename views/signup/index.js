@@ -57,3 +57,18 @@ matchInput.addEventListener('input', e => {
     matchValidation = e.target.value === passwordInput.value;
     validation(matchInput, matchValidation);
 });
+
+form.addEventListener('submit', async e => {
+    e.preventDefault();
+    try {
+    const newUser = {
+        name: nameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value
+    }
+    const response = await axios.post('/api/users', newUser);
+    console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+});
