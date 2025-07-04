@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/user');
+const loginRouter = require('./controllers/login');
 
 (async() =>{
     try {
@@ -28,7 +29,7 @@ app.use('/images', express.static(path.resolve('img')));
 app.use('/api/users', usersRouter);
 
 //Rutas Backend
-app.use('/api/users', userRouter);
-app.use('/api/login', loginRouter);
+app.use('/api/users', usersRouter);
+//app.use('/api/login', loginRouter);
 
 module.exports = app;

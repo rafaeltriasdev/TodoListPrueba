@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { response } = require('express');
 const jwt = require('jsonwebtoken');
 
-loginRouters.post('/' , async (req, res) => {
+loginRouter.post('/' , async (req, res) => {
     const { email, password } = req.body;
     const userExist = await User.findOne({ email });
     if (!userExist) {
