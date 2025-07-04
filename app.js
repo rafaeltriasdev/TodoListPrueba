@@ -1,7 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const mongoose = require('mongoose');
 
+(async() =>{
+    try {
+        await mongoose.connect(process.env.MONGO_URI_TEST);
+        console.log('Conecto a Mongo DB');
+    } catch (error) {
+        console.log(error);
+    }
+})();
 
 
 //Rutas Frontend

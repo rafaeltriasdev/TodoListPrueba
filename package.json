@@ -8,10 +8,11 @@
     "dev": "cross-env NODE_ENV=dev nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mariana G",
+  "author": "Rafael",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.0.1",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.1",
