@@ -26,7 +26,7 @@ const userForToken = {
     id: userExist.id,
 }
 
-const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET {
+const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: '1d'
 });
 
