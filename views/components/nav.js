@@ -1,7 +1,7 @@
 const navbar = document.querySelector('#navbar');
 
 const createNavHome = () => {
-    navbar.innerHTML = `<div class="max-width-7xl h-16 mx-auto flex items-center px-4 justify-between">
+    navbar.innerHTML = `<div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
                             <p class="font-bold text-sm text-white">TodoApp</p>
 
                             <!-- version mobile -->

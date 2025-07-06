@@ -2,6 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/user');
 const loginRouter = require('./controllers/login');
@@ -15,7 +18,10 @@ const loginRouter = require('./controllers/login');
     }
 })();
 
+//Middlewares que se ejecutan antes de las rutas
+app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 //Rutas Frontend
 app.use('/', express.static(path.resolve('views', 'home')));
@@ -25,11 +31,10 @@ app.use('/login', express.static(path.resolve('views', 'login')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/images', express.static(path.resolve('img')));
 
-//Rutas Backend
-app.use('/api/users', usersRouter);
+app.use(morgan('tiny'));
 
 //Rutas Backend
 app.use('/api/users', usersRouter);
-//app.use('/api/login', loginRouter);
+app.use('/api/login', loginRouter);
 
 module.exports = app;
