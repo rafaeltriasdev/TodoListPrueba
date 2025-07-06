@@ -15,8 +15,7 @@ loginRouter.post('/' , async (req, res) => {
         return res.status(400).json({ error: 'Email no verificado' });
     }
 
-    const saltRounds = 10;
-    const isCorrect = await bcrypt.compare(password, userExist.passwordHash);
+    const isCorrect = await bcrypt.compare(password, userExist.passwordHash, 10);
     
     if (!isCorrect) {
         return res.status(400).json({ error: 'Email o contraseña incorrectos' });
