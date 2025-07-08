@@ -8,6 +8,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/user');
 const loginRouter = require('./controllers/login');
+const todosRouter = require('./controllers/todos');
+const { userExtractor } = require('./middleware/auth');
 
 (async() =>{
     try {
@@ -28,6 +30,7 @@ app.use('/', express.static(path.resolve('views', 'home')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/todos', express.static(path.resolve('views', 'todos')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/images', express.static(path.resolve('img')));
 app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
@@ -38,6 +41,7 @@ app.use(morgan('tiny'));
 //Rutas Backend
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/todos', userExtractor, todosRouter);
 
 
 module.exports = app;
