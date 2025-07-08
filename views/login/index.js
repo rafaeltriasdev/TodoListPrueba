@@ -1,5 +1,3 @@
-const e = require("express");
-
 const emailInput = document.querySelector('#email-input');
 const passwordInput = document.querySelector('#password-input');
 const form = document.querySelector('#form');
@@ -12,7 +10,7 @@ form.addEventListener('submit',async e => {
         email: emailInput.value,
         password: passwordInput.value
     }
-    await axios.post(/api/login, user);
+    await axios.post('/api/login', user);
     window.location.pathname = `/todos/`;
     }
     catch (error) {
