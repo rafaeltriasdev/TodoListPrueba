@@ -6,10 +6,14 @@ const userSchema = new mongoose.Schema({
     email: String, // Almacena el correo electrónico del usuario
     passwordHash: String, // Almacena el hash de la contraseña
     verified: { 
-     type: Boolean,
-     default: false
+    type: Boolean,
+    default: false
      }, // Indica si el usuario ha verificado su cuenta
-});
+    todos: [{
+        type: mongoose.Schema.Types.ObjectId, // Almacena el ID del usuario que creó el todo
+        ref: 'todo' // Referencia al modelo User
+        }]
+    });
 
 // Configura cómo se transforman los documentos al convertirlos a JSON
 userSchema.set('toJSON', {
