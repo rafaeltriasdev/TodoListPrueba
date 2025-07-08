@@ -29,7 +29,7 @@ usersRouter.post('/', async (request, response) => {
 
     const savedUser = await newUser.save(); // Guarda el nuevo usuario en la base de datos
     const token = jwt.sign({ id: savedUser.id }, process.env.ACCESS_TOKEN_SECRET, { 
-        expiresIn: '10000' // Expira en 10 segundos
+        expiresIn: '1m' // Expira en 1 minuto
     });
 
 // Create a test account or replace with real credentials.
@@ -58,17 +58,20 @@ usersRouter.post('/', async (request, response) => {
 usersRouter.patch('/:id/:token', async (request, response) => {
     try {
     const token = request.params.token; // Obtiene el token de la URL
-    console.log(token);
-    console.log(id);
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); // Verifica el token
     console.log(decodedToken);
     } catch (error) {
-        const id = request.params.id; // Obtiene el ID del usuario de la URL
+
+        //Encontrar el email del usuario
+        const id = request.params.id;
+        const { email } = await User.findById(id); // Busca el usuario por ID
+        
+        //Firmar el nuevo token
         const token = jwt.sign({ id: id }, process.env.ACCESS_TOKEN_SECRET, { 
         expiresIn: '1m' // Expira en 1 minuto
     });
 
-// Crea una cuenta de prueba o reemplaza con credenciales reales.
+// Enviar un nuevo correo electrónico de verificación
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com', // Cambia el host si es necesario 
         port: 465, // Cambia el puerto si es necesario
@@ -79,14 +82,15 @@ usersRouter.patch('/:id/:token', async (request, response) => {
     },
     });
 
-// Envía un correo electrónico de bienvenida al nuevo usuario
     await transporter.sendMail({
         from: process.env.EMAIL_USER, // Remitente',
-        to: savedUser.email, // Destinatario
+        to: email, // Destinatario
         subject: 'Verificacion de usuario', // Asunto del correo
         html: `<a href="${PAGE_URL}/verify/${token}">Verificar correo</a>`, // HTML body
     });
-        return response.status(400).json({ error: 'Link ya expiro.' });
+        
+    
+        return response.status(400).json({ error: 'Link ya expiro. Se ha enviado un nuevo link de verificacion a su correo.' });
     }
 
 });

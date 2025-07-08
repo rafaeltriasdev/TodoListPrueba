@@ -1,11 +1,13 @@
+const textInfo = document.querySelector('#text-info');
+
 (async () => {
     try {
         const token = window.location.pathname.split('/')[3];
         const id = window.location.pathname.split('/')[2]; 
+        console.log(id);
         const { data } = await axios.patch (`/api/users/${id}/${token}`);
         console.log(data);
     } catch (error) {
-        console.log(error.response.data.error);
-
+        textInfo.innerHTML = error.response.data.error;
     }
 })();
