@@ -20,6 +20,6 @@ todoSchema.set('toJSON', {
 });
 
 // Crea el modelo de usuario basado en el esquema definido
-const Todo = mongoose.model('Todo', userSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 
-module.exports = User;
+module.exports = Todo;

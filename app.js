@@ -8,6 +8,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const usersRouter = require('./controllers/user');
 const loginRouter = require('./controllers/login');
+const todosRouter = require('./controllers/todos');
+const { userExtractor } = require('./middleware/auth');
 
 (async() =>{
     try {
@@ -37,6 +39,7 @@ app.use(morgan('tiny'));
 //Rutas Backend
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/todos', userExtractor, todosRouter);
 
 
 module.exports = app;
