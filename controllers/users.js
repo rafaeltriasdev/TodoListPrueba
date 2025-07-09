@@ -20,7 +20,10 @@ usersRouter.post('/', async (request, response) => {
         return response.status(400).json({error: 'El email ya está en uso' });
 
     }
-    const passwordHash = await bcrypt.hash(password, 10); // Hash de la contraseña
+
+    const saltRounds = 10; // Número de rondas para el hash de la contraseña
+
+    const passwordHash = await bcrypt.hash(password, saltRounds); // Hash de la contraseña
     const newUser = new User({
         name,
         email,

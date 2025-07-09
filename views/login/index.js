@@ -3,10 +3,10 @@ const passwordInput = document.querySelector('#password-input');
 const form = document.querySelector('#form');
 const errorText = document.querySelector('#error-text');
 
-form.addEventListener('submit',async e => {
+form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    try{
+    try {
         const user = {
         email: emailInput.value,
         password: passwordInput.value
@@ -15,7 +15,7 @@ form.addEventListener('submit',async e => {
     window.location.pathname = `/todos/`;
     }
     catch (error) {
-        console.error(error);
+        console.log(error);
         errorText.innerHTML = error.response?.data?.error || 'Error de conexión o credenciales incorrectas.';
 }
     
