@@ -15,7 +15,7 @@ form.addEventListener('submit',async e => {
     }
     catch (error) {
         console.error(error);
-        errorText.innerHTML = error.response.data.error;
-    }
+        errorText.innerHTML = error.response?.data?.error || 'Error de conexión o credenciales incorrectas.';
+}
     
     });
