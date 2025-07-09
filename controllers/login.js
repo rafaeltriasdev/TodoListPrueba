@@ -30,26 +30,15 @@ const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: '1d'
 });
 
-// response.cookie('accessToken', accessToken, {
-//     expires: '1d'
-// });
-console.log(accessToken);
-console.log(new Date());
-// console.log(new Date(Date.now() + 1000 * 60 * 60 * 24 * 1)) // 1 day in milliseconds
-// });
-
-// response.cookie('accessToken', accessToken, {
-//     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1), // 1 day in milliseconds
-//     secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-//     httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+response.cookie('accessToken', accessToken, {
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1), // 1 day in milliseconds
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    httpOnly: true // Prevents client-side JavaScript from accessing the cookie
     
-// }); 
-
-// return response.sendStatus(200);
-
 });
 
+return response.sendStatus(200);
 
- 
+});
 
 module.exports = loginRouter; 
