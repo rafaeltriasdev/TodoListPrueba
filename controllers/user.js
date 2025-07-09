@@ -29,7 +29,7 @@ usersRouter.post('/', async (request, response) => {
 
     const savedUser = await newUser.save(); // Guarda el nuevo usuario en la base de datos
     const token = jwt.sign({ id: savedUser.id }, process.env.ACCESS_TOKEN_SECRET, { 
-        expiresIn: '1m' // Expira en 1 minuto
+        expiresIn: '1d' // Expira en 1 día
     });
 
 // Create a test account or replace with real credentials.
@@ -55,11 +55,14 @@ usersRouter.post('/', async (request, response) => {
 
 });
 
+// Ruta para verificar el usuario mediante un token
 usersRouter.patch('/:id/:token', async (request, response) => {
     try {
     const token = request.params.token; // Obtiene el token de la URL
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET); // Verifica el token
-    console.log(decodedToken);
+    const id = decodedToken.id; // Obtiene el ID del usuario desde el token;
+    await User.findByIdAndUpdate(id, { verified: true });
+    return response.sendStatus(200);
     } catch (error) {
 
         //Encontrar el email del usuario
@@ -68,7 +71,7 @@ usersRouter.patch('/:id/:token', async (request, response) => {
         
         //Firmar el nuevo token
         const token = jwt.sign({ id: id }, process.env.ACCESS_TOKEN_SECRET, { 
-        expiresIn: '1m' // Expira en 1 minuto
+        expiresIn: '1d' // Expira en 1 día
     });
 
 // Enviar un nuevo correo electrónico de verificación
@@ -86,7 +89,7 @@ usersRouter.patch('/:id/:token', async (request, response) => {
         from: process.env.EMAIL_USER, // Remitente',
         to: email, // Destinatario
         subject: 'Verificacion de usuario', // Asunto del correo
-        html: `<a href="${PAGE_URL}/verify/${token}">Verificar correo</a>`, // HTML body
+        html: `<a href="${PAGE_URL}/verify/${id}/${token}">Verificar correo</a>`, // HTML body
     });
         
     
