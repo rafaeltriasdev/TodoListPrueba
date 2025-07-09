@@ -8,7 +8,9 @@ const completedCountSpan = document.querySelector('.completed-count');
 const incompletedCountSpan = document.querySelector('.incompleted-count');
 
 (async() => {
-	const { data } = await axios.get('/api/todos');
+	const { data } = await axios.get('/api/todos', {
+		withCredentials: true
+	});
 })();
 
 
@@ -34,7 +36,7 @@ const todoCount = () => {
 	incompletedCount();
 };
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
 	e.preventDefault();
 
 	// Check if the input is empty
@@ -51,6 +53,8 @@ form.addEventListener('submit', e => {
 	invalidCheck.classList.add('hidden');
 
 	// Create list item
+const { data } = await axios.post('/api/todos', { texto: input.value });
+console.log(data);
 	const listItem = document.createElement('li');
 	listItem.classList.add('flex', 'flex-row');
 	listItem.innerHTML = `
