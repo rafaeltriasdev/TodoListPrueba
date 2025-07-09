@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const todosRouter = require('./controllers/todos');
-const { userExtractor } = require('./middleware/auth');
+const { userExtractor } = require('./middleware/auth'); // Middleware para extraer el usuario autenticado
 
 (async() =>{
     try {
