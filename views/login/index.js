@@ -2,6 +2,7 @@ const emailInput = document.querySelector('#email-input');
 const passwordInput = document.querySelector('#password-input');
 const form = document.querySelector('#form');
 const errorText = document.querySelector('#error-text');
+
 form.addEventListener('submit',async e => {
     e.preventDefault();
 

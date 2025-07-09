@@ -3,7 +3,7 @@ const User = require('../models/user');
 const Todo = require('../models/todo');
 const { response } = require('../app');
 
-todosRouter.get('/', async (req, res) => {
+todosRouter.get('/', async (require, response) => {
     console.log('chao')
 
         // const todos = await Todo.find({ user: 'jajajaja' })
