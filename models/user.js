@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
      }, // Indica si el usuario ha verificado su cuenta
     todos: [{
         type: mongoose.Schema.Types.ObjectId, // Almacena el ID del usuario que creó el todo
-        ref: 'todo' // Referencia al modelo User
+        ref: 'Todo' // Referencia al modelo Todo
         }]
     });
 

@@ -8,49 +8,52 @@ todosRouter.use(userExtractor); // Aplicar el middleware para todas las rutas de
 
 todosRouter.get('/', async (request, response) => {
     const user = request.user;
+    //console.log(request.user);
 
-        const todos = await Todo.find({ user: user.id })
+        const todos = await Todo.find({ user: user.id })  
         return response.status(200).json(todos);
 });
 
 todosRouter.post('/', async (request, response) => {
     const user = request.user;
     const { text } = request.body; 
-    const newTodo = new Todo({
-        text,
-        checked: false,
-        user: user._id
-    });
-const savedTodo = await newTodo.save();
-user.todos.push(savedTodo._id);
-await user.save();
+    console.log(text);
 
-return response.status(201).json(savedTodo);
-
+    // const newTodo = new Todo({
+    //     text,
+    //     checked: false,
+    //     user: user._id
 });
+// const savedTodo = await newTodo.save();
+// user.todos.push(savedTodo._id);
+// await user.save();
 
-todosRouter.delete('/:id', async (request, response) => {
-    const user = request.user;
+// return response.status(201).json(savedTodo);
 
-await Todo.findByIdAndDelete(request.params.id);
+// });
 
-user.todos = user.todos.filter(todo => todo.id !== request.params.id);
+// /todosRouter.delete('/:id', async (request, response) => {
+//     const user = request.user;
 
-await user.save();
-return response.sendStatus(204);
+// await Todo.findByIdAndDelete(request.params.id);
 
-});
+// user.todos = user.todos.filter(todo => todo.id !== request.params.id);
 
-todosRouter.patch('/:id', async (request, response) => {
-    const user = request.user;
+// await user.save();
+// return response.sendStatus(204);
+
+// });
+
+// /todosRouter.patch('/:id', async (request, response) => {
+//     const user = request.user;
 
 
-const { checked } = request.body;
+// const { checked } = request.body;
 
-await Todo.findByIdAndUpdate(request.params.id, { checked });
+// await Todo.findByIdAndUpdate(request.params.id, { checked });
 
-return response.sendStatus(200);
-});
+// return response.sendStatus(200);
+// });
 
 
 module.exports = todosRouter;
