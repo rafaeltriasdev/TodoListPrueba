@@ -23,11 +23,11 @@ loginRouter.post('/' , async (request, response) => {
         return response.status(400).json({ error: 'Email o contraseña incorrectos' });
     }
 
-const userForToken = { 
+const userForToken = {
     id: userExist.id,
 }
 
-const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, { //repasar
+const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: '1d'
 });
 

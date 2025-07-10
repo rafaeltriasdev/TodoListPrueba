@@ -47,7 +47,7 @@ form.addEventListener('submit', async e => {
 
 	// Create list item
 const { data } = await axios.post('/api/todos', { texto: input.value });
-console.log(data);
+//console.log(data);
 
 	const listItem = document.createElement('li');
 	listItem.id = data.id; // Assuming the response contains an id for the todo
