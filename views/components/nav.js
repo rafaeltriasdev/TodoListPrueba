@@ -1,5 +1,6 @@
-const navbar = document.querySelector('#navbar');
+const navbar = document.querySelector('#navbar'); // navbar element
 
+// funciones para crear el navbar dependiendo de la pagina
 const createNavHome = () => {
     navbar.innerHTML = `<div class="max-w-7xl h-16 mx-auto flex items-center px-4 justify-between">
                             <p class="font-bold text-sm text-white">TodoApp</p>
@@ -78,6 +79,7 @@ const createNavTodos = () => {
                         </div>`;
 };
 
+// verificar en que pagina estoy y crear el nav correspondiente
 if(window.location.pathname === '/') {
     createNavHome();
 } else if (window.location.pathname === '/signup/') {
@@ -86,19 +88,22 @@ if(window.location.pathname === '/') {
     createNavLogin();
 } else if (window.location.pathname === '/todos/') {
     createNavTodos();
-}
 
+}
+// agregar el evento de click al boton de menu mobile
 const navBtn = navbar.children[0].children[1];
 
+// evento para el boton de menu mobile
 navBtn.addEventListener('click', e => {
     const menuMobile = navbar.children[0].children[2];
     
+    // verificar si el menu mobile existe
     if (!navBtn.classList.contains('active')) {
         navBtn.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />`
         navBtn.classList.add('active');
         menuMobile.classList.remove('hidden');
         menuMobile.classList.add('flex');
-    } else {
+    } else { // si el menu mobile ya esta abierto, cerrarlo
         navBtn.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />`;
         navBtn.classList.remove('active');
         menuMobile.classList.add('hidden');
@@ -106,9 +111,10 @@ navBtn.addEventListener('click', e => {
     }
 })
 
+// agregar el evento de click al boton de cerrar sesion
 const closeBtnDescktop = navbar.children[0].children[3].children[0];
 const closeBtnMobile = navbar.children[0].children[2].children[0];
-
+// verificar si el boton de cerrar sesion existe
 closeBtnDescktop.addEventListener('click', async e => {
     try {
         await axios.get('/api/logout');

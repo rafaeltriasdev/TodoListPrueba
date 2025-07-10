@@ -40,8 +40,6 @@ response.cookie('accessToken', accessToken, {
 
 return response.sendStatus(200);
 
-
-
 });
 
 module.exports = loginRouter; 

@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const todosRouter = require('./controllers/todos');
+const logoutRouter = require('./controllers/logout');
 const { userExtractor } = require('./middleware/auth'); // Middleware para extraer el usuario autenticado
 
 (async() =>{
@@ -41,6 +42,7 @@ app.use(morgan('tiny'));
 //Rutas Backend
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/logout', logoutRouter);
 app.use('/api/todos', userExtractor, todosRouter);
 
 

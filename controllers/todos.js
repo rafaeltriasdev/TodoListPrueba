@@ -19,41 +19,40 @@ todosRouter.post('/', async (request, response) => {
     const { text } = request.body; 
     console.log(text);
 
-    // const newTodo = new Todo({
-    //     text,
-    //     checked: false,
-    //     user: user._id
+     const newTodo = new Todo({
+         text,
+         checked: false,
+         user: user._id
 });
-// const savedTodo = await newTodo.save();
-// user.todos.push(savedTodo._id);
-// await user.save();
+ const savedTodo = await newTodo.save();
+ user.todos.push(savedTodo._id);
+ await user.save();
 
-// return response.status(201).json(savedTodo);
+ return response.status(201).json(savedTodo);
 
-// });
+ });
 
-// /todosRouter.delete('/:id', async (request, response) => {
-//     const user = request.user;
+ todosRouter.delete('/:id', async (request, response) => {
+     const user = request.user;
 
-// await Todo.findByIdAndDelete(request.params.id);
+ await Todo.findByIdAndDelete(request.params.id);
 
-// user.todos = user.todos.filter(todo => todo.id !== request.params.id);
+ user.todos = user.todos.filter(todo => todo.id !== request.params.id);
 
-// await user.save();
-// return response.sendStatus(204);
+ await user.save();
+ return response.sendStatus(204);
 
-// });
+ });
 
-// /todosRouter.patch('/:id', async (request, response) => {
-//     const user = request.user;
+ todosRouter.patch('/:id', async (request, response) => {
+     const user = request.user;
 
+ const { checked } = request.body;
 
-// const { checked } = request.body;
+ await Todo.findByIdAndUpdate(request.params.id, { checked });
 
-// await Todo.findByIdAndUpdate(request.params.id, { checked });
-
-// return response.sendStatus(200);
-// });
+ return response.sendStatus(200);
+ });
 
 
 module.exports = todosRouter;
