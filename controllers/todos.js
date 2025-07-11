@@ -16,7 +16,7 @@ todosRouter.get('/', async (request, response) => {
 
 todosRouter.post('/', async (request, response) => {
     const user = request.user;
-    const { texto } = request.body; 
+    const { texto } = request.body; // texto es el campo del todo
     
     console.log(request.body);
 
