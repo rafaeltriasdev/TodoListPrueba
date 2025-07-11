@@ -12,7 +12,7 @@ const todosRouter = require('./controllers/todos');
 const logoutRouter = require('./controllers/logout');
 const { userExtractor } = require('./middleware/auth'); // Middleware para extraer el usuario autenticado
 
-(async() =>{
+(async() =>{// Función autoejecutable para conectar a la base de datos
     try {
         await mongoose.connect(process.env.MONGO_URI_TEST);
         console.log('Conecto a Mongo DB');
